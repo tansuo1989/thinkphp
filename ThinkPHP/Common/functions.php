@@ -1396,10 +1396,12 @@ function session($name = '', $value = '')
             ini_set('session.cookie_domain', $name['domain']);
         }
 
-        if (isset($name['expire'])) {
-            ini_set('session.gc_maxlifetime', $name['expire']);
-            ini_set('session.cookie_lifetime', $name['expire']);
+        if(isset($name['expire'])||C("SESSION_EXPIRE")){
+            $expire=$name['expire']?:C("SESSION_EXPIRE");
+            ini_set('session.gc_maxlifetime',   $expire);
+            ini_set('session.cookie_lifetime',  $expire);
         }
+        
         if (isset($name['use_trans_sid'])) {
             ini_set('session.use_trans_sid', $name['use_trans_sid'] ? 1 : 0);
         }
