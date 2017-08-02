@@ -1,7 +1,7 @@
-﻿##修改说明：
+﻿## 修改说明：
 
-*修复原配置中的SESSION_EXPIRE在session()函数中无效的问题
-*分页类作了些修改，以适应bootstrap UI的分页样式
+* 修复原配置中的SESSION_EXPIRE在session()函数中无效的问题
+* 分页类作了些修改，以适应bootstrap UI的分页样式
 * verify类添加了draw方法，方便控制验证码的生成
 
 
