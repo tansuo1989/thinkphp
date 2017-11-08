@@ -5,4 +5,4 @@
 * verify类添加了draw方法，方便控制验证码的生成
 * session 添加 服务端有效时间配置SESSION_EXPIRE,session对应cookie的有效期统一设置为浏览器的默认时间 ( session()函数中修改 )
 
-## <a href="https://github.com/top-think/thinkphp">原thinkphp 框架的简介 </a>
+## <a href="https://github.com/top-think/thinkphp" target="_blank">原thinkphp 框架的简介 </a>
