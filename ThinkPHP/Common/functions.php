@@ -1239,7 +1239,7 @@ function session($name='',$value='') {
         if(isset($name['path']))            session_save_path($name['path']);
         if(isset($name['domain']))          ini_set('session.cookie_domain', $name['domain']);
         if(isset($name['expire'])||C("SESSION_EXPIRE")){
-            $expire=$name['expire']?:C("SESSION_EXPIRE");
+            $expire=isset($name['expire'])?$name['expire']:C("SESSION_EXPIRE");
             ini_set('session.gc_maxlifetime',   $expire);
             ini_set('session.cookie_lifetime',  0);
         }
