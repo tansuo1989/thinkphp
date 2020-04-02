@@ -268,6 +268,7 @@ function T($template='',$layer=''){
  * @param mixed $datas 要获取的额外数据源
  * @return mixed
  */
+<<<<<<< HEAD
 function I($name,$default='',$filter=null,$datas=null) {
 	static $_PUT	=	null;
 	if(strpos($name,'/')){ // 指定修饰符
@@ -306,6 +307,51 @@ function I($name,$default='',$filter=null,$datas=null) {
                     break;
                 default:
                     $input  =  $_GET;
+=======
+function I($name, $default = '', $filter = null, $datas = null)
+{
+    static $_PUT = null;
+    if (strpos($name, '/')) {
+        // 指定修饰符
+        list($name, $type) = explode('/', $name, 2);
+    } elseif (C('VAR_AUTO_STRING')) {
+        // 默认强制转换为字符串
+        $type = 's';
+    }
+    if (strpos($name, '.')) {
+        // 指定参数来源
+        list($method, $name) = explode('.', $name, 2);
+    } else {
+        // 默认为自动判断
+        $method = 'param';
+    }
+    switch (strtolower($method)) {
+        case 'get':
+            $input = &$_GET;
+            break;
+        case 'post':
+            $input = &$_POST;
+            break;
+        case 'put':
+            if (is_null($_PUT)) {
+                parse_str(file_get_contents('php://input'), $_PUT);
+            }
+            $input = $_PUT;
+            break;
+        case 'param':
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'POST':
+                    $input = $_POST;
+                    break;
+                case 'PUT':
+                    if (is_null($_PUT)) {
+                        parse_str(file_get_contents('php://input'), $_PUT);
+                    }
+                    $input = $_PUT;
+                    break;
+                default:
+                    $input = $_GET;
+>>>>>>> 40757e0d881b6b0d949501aa58148e1a8d77e340
             }
             break;
         case 'path'    :   
@@ -377,6 +423,7 @@ function I($name,$default='',$filter=null,$datas=null) {
                 }
             }
         }
+<<<<<<< HEAD
         if(!empty($type)){
         	switch(strtolower($type)){
         		case 'a':	// 数组
@@ -392,6 +439,23 @@ function I($name,$default='',$filter=null,$datas=null) {
         			$data 	=	(boolean)$data;
         			break;
                 case 's':   // 字符串
+=======
+        if (!empty($type)) {
+            switch (strtolower($type)) {
+                case 'a': // 数组
+                    $data = (array) $data;
+                    break;
+                case 'd': // 数字
+                    $data = (int) $data;
+                    break;
+                case 'f': // 浮点
+                    $data = (float) $data;
+                    break;
+                case 'b': // 布尔
+                    $data = (boolean) $data;
+                    break;
+                case 's': // 字符串
+>>>>>>> 40757e0d881b6b0d949501aa58148e1a8d77e340
                 default:
                     $data   =   (string)$data;
         	}
@@ -1539,8 +1603,13 @@ function send_http_status($code) {
 function think_filter(&$value){
 	// TODO 其他安全过滤
 
+<<<<<<< HEAD
 	// 过滤查询特殊字符
     if(preg_match('/^(EXP|NEQ|GT|EGT|LT|ELT|OR|XOR|LIKE|NOTLIKE|NOT BETWEEN|NOTBETWEEN|BETWEEN|NOTIN|NOT IN|IN)$/i',$value)){
+=======
+    // 过滤查询特殊字符
+    if (preg_match('/^(EXP|NEQ|GT|EGT|LT|ELT|OR|XOR|LIKE|NOTLIKE|NOT BETWEEN|NOTBETWEEN|BETWEEN|NOTIN|NOT IN|IN|BIND)$/i', $value)) {
+>>>>>>> 40757e0d881b6b0d949501aa58148e1a8d77e340
         $value .= ' ';
     }
 }
