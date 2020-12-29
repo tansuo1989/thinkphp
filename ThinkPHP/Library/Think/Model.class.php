@@ -278,7 +278,10 @@ class Model {
             }else{
                 $fields =   $this->fields;
             }  
-                
+			
+			if(!isset($this->options['strict']) && C("FILEDS_STRICT")){
+                $this->options['strict']=C("FILEDS_STRICT");
+            }  
             foreach ($data as $key=>$val){
                 if(!in_array($key,$fields,true)){
                     if(!empty($this->options['strict'])){
